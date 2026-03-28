@@ -149,7 +149,14 @@
     .stat-label { font-size: .82rem; color: var(--muted); margin-top: 4px; }
 
     /* ── SECTION COMMON ── */
-    section { padding: 100px 5%; }
+    section {
+  padding: 100px 20px;
+}
+
+.section-inner{
+  max-width:1200px;
+  margin:0 auto;
+}
 
     .section-tag {
       display: inline-block;
@@ -246,9 +253,12 @@
 
     /* ── CHANNELS ── */
     .channels-wrap {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-      margin-top: 56px; max-width: 860px;
-    }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 56px auto 0 auto;
+  max-width: 860px;
+}
 
     .channel-card {
       border-radius: var(--radius);
@@ -274,10 +284,12 @@
 
     /* ── PRICING ── */
     .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px; margin-top: 56px; max-width: 900px;
-    }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
     .price-card {
       background: var(--bg2);
@@ -398,6 +410,14 @@
       .footer-grid { grid-template-columns: 1fr; }
       h1 { letter-spacing: -1px; }
     }
+
+    .section-tag,
+.section-title,
+.section-sub{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
   </style>
 </head>
 <body>
@@ -422,7 +442,7 @@
     <li><a href="atencion-al-cliente.html">Atención al Cliente</a></li>
     <li><a href="#pricing">Precios</a></li>
   </ul>
-  <a href="#pricing" class="nav-cta">Empezar gratis</a>
+  <a href="#pricing" class="nav-cta">Contáctanos</a>
 </nav>
 
 <!-- HERO -->
@@ -443,23 +463,23 @@
   </p>
   <div class="hero-actions">
     <a href="#pricing" class="btn-primary">
-      <span>📱</span> Probar 14 días gratis
+      <span>📱</span> Escríbenos
     </a>
     <a href="#features" class="btn-secondary">
-      <span>▶</span> Ver cómo funciona
+      <span>▶</span> Lo que hacemos...
     </a>
   </div>
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num g">+5,000</div>
+      <div class="stat-num g">+1,000</div>
       <div class="stat-label">Negocios activos</div>
     </div>
     <div class="stat">
-      <div class="stat-num p">87%</div>
+      <div class="stat-num p">91%</div>
       <div class="stat-label">Tasa de respuesta</div>
     </div>
     <div class="stat">
-      <div class="stat-num g">3x</div>
+      <div class="stat-num g">4x</div>
       <div class="stat-label">Más ventas cerradas</div>
     </div>
     <div class="stat">
@@ -476,7 +496,7 @@
     <span class="logo-item">Tienda Online</span>
     <span class="logo-item">Clínica Dental</span>
     <span class="logo-item">Agencia Viajes</span>
-    <span class="logo-item">Inmobiliaria</span>
+    <span class="logo-item">Inmobiliarias</span>
     <span class="logo-item">Restaurante</span>
     <span class="logo-item">Gym &amp; Fitness</span>
   </div>
@@ -596,7 +616,7 @@
         <li class="no">Dashboard analítico</li>
         <li class="no">Integraciones CRM</li>
       </ul>
-      <button class="btn-plan btn-plan-outline">Empezar gratis</button>
+      <button class="btn-plan btn-plan-outline">Contáctanos</button>
     </div>
 
     <div class="price-card popular">
@@ -612,7 +632,7 @@
         <li>Dashboard analítico completo</li>
         <li class="no">Integraciones CRM</li>
       </ul>
-      <button class="btn-plan btn-plan-filled">Elegir Pro</button>
+      <button class="btn-plan btn-plan-filled">Contáctanos</button>
     </div>
 
     <div class="price-card">
@@ -627,7 +647,7 @@
         <li>Dashboard + reportes PDF</li>
         <li>Integraciones CRM</li>
       </ul>
-      <button class="btn-plan btn-plan-outline">Elegir Business</button>
+      <button class="btn-plan btn-plan-outline">Contáctanos</button>
     </div>
 
   </div>
@@ -777,6 +797,58 @@
     <p>© 2025 Hi Automates. Todos los derechos reservados.</p>
     <p>Hecho con ❤️ para Latinoamérica</p>
   </div>
+  <script>
+  var vapiInstance = null;
+  const assistant = "8ba6d95a-7c77-4b15-b0f7-753386084d9c";          // tu Assistant ID
+  const apiKey    = "f13bc57b-38f8-45f5-8b40-41f89f8a1b8f";        // tu Public API Key
+  const buttonConfig = {
+    position: "bottom-right",  // puedes cambiar a "bottom-left"
+    // También puedes agregar más estilos o ajustes
+  };
+
+  (function(d, t){
+    var g = document.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.src   = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g, s);
+    g.onload = function() {
+      vapiInstance = window.vapiSDK.run({
+        apiKey:    apiKey,
+        assistant: assistant,
+        config:    buttonConfig
+      });
+    };
+  })(document, "script");
+</script>
+<script>
+  function forceVapiButtonFixed() {
+    const interval = setInterval(() => {
+      const btn = document.querySelector('.vapi-icon-container');
+
+      if (btn) {
+        btn.style.position = 'fixed';
+        btn.style.bottom = '20px';
+        btn.style.right = '20px';
+        btn.style.left = 'unset'; // Por si está en la izquierda
+        btn.style.zIndex = '99999';
+        btn.style.pointerEvents = 'auto';
+        btn.style.opacity = '1';
+        console.log('✅ Botón fijado');
+        clearInterval(interval);
+      }
+    }, 500); // Intenta cada 0.5 seg
+  }
+
+  // Ejecutar cuando la página carga
+  window.addEventListener('load', forceVapiButtonFixed);
+
+  // Y también cuando haya scroll o resize (por si el botón aparece tarde)
+  window.addEventListener('scroll', forceVapiButtonFixed);
+  window.addEventListener('resize', forceVapiButtonFixed);
+</script>
+
 </footer>
 
 </body>
